@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minmum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    
+    <script src="react/react.development (1).js"></script>
+	<script src="react/react-dom.development (1).js"></script>
+	<script src="react/babel.min.js"></script>
+
+    <script src='./icon/iconfont.js'></script>
+    <link rel="stylesheet" href="./icon/iconfont.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <style>
+      .active{
+          background: skyblue
+      }
+  </style>
+  <body>
+    <div id="root">
+     
+    </div>
+    <script type="text/babel">
+        let headerStyle = {
+            'background': 'rgb(28, 10, 110)',
+            'color': '#fff',
+            'height': '3rem'
+        }
+        let img = './img/1.gif'
+        function Username () {
+            return (
+                <div className='username'>
+                    <img src={img}></img>
+                    <ul>
+                        <li className='cl'>用户名 12345</li>
+                        <li>中译语通科技（北京）有限公司</li>
+                    </ul>
+                </div>
+            )
+        }
+        function Content () {
+            return (
+                <div className="cont">
+                    <ul>
+                        <li className='cl'>已购数据有效期: 2011-11-1 至 2012-11-8</li>
+                        <li>行业：<span>经济；娱乐；社会</span></li>
+                        <li>账户数：<span>4</span></li>
+                        <li>新闻媒体源：<span>新闻（国内）；新闻（海外）300；</span></li>
+                        <li>社交媒体源：<span>新浪微博：Facebook</span></li>
+                    </ul>
+                </div>
+            )
+        }
+
+        class Rend extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    current: ''
+                }
+                this.bgChange = this.bgChange.bind(this);
+            }
+            bgChange(index){
+                return index === this.state.current ? 'active' : '';
+            }
+            render () {
+                let arr = [
+                    {
+                        "icon": "icon iconfont icon-cart1",
+                        "text": "我的采编"
+                    },
+                    {
+                        "icon": "icon iconfont icon-favorite",
+                        "text": "我的收藏"
+                    },
+                    {
+                        "icon": 'icon iconfont icon-all',
+                        "text": "账号设置"
+                    },
+                    {
+                        "icon": 'icon iconfont icon-comments',
+                        "text": "意见反馈"
+                    }
+                ]
+                return (<div className="list">
+                            {arr.map((item, index) => {
+                                return (<a href='#' key={index} className={ this.bgChange(index) }
+                                    onClick={
+                                        () => { 
+                                            this.setState({ current: index })
+                                        }
+                                    }
+                                ><i className={item.icon}></i><span>{item.text}</span></a>)
+                            })}  
+                    </div>)
+            }
+        }
+
+        let botm = {
+            "background": '#fff',
+            "height": '3rem',
+            "margin": '.6rem 0'
+        }
+        class Btn extends React.Component{
+            render() { // 传值 this.propa.name
+            //    console.log(this.props.name)
+                return (
+                    <div className="shbtn">
+                        <div className='shop' style={botm}><i className='icon iconfont icon-edit'></i>如何购买</div>
+                        <div className='btn' style={botm}>退出</div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <div className='box'>
+                <header style={headerStyle}><i className='icon iconfont icon-back'></i>个人中心<span></span></header>
+                <section>
+                    <Username />
+                    <Content />
+                    <Rend txt='txt'/>
+                    <Btn name='234'/>
+                </section>
+            </div>,
+            document.getElementById('root')
+        );
+
+    </script>
+  </body>
+</html>

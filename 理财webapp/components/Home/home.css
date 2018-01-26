@@ -1,0 +1,12 @@
+.swiper-slide img{
+    width: 100%;
+}
+.banner{
+    position: relative
+}
+.buton{
+    position: absolute;
+    top:45%;
+    width: 2rem;
+    height:2rem;
+}

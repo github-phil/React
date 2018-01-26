@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react/react.development (1).js"></script>
+	<script src="react/react-dom.development (1).js"></script>
+	<script src="react/babel.min.js"></script>
+
+</head>
+<body>
+ 
+   <div id="example"></div>
+</body> 
+<script type='text/babel'>
+    class Input extends React.Component{
+        constructor () {
+            super()
+            this.state ={
+                value: ''
+            }
+            this.handleChange = this.handleChange.bind(this)
+        }
+        handleChange (e) {
+            this.props.valueInput1(e.target.value, this.props.name)
+            this.setState ({value: e.target.value})
+        }
+        render() {
+            return (
+                <p>一、<input type='text' onChange={this.handleChange} value={this.props.inpvalue}></input>{this.state.value}</p>
+            )
+        }
+    }
+    // class Input2 extends React.Component{
+    //     constructor () {
+    //         super()
+    //         this.state ={
+    //             value: ''
+    //         }
+    //         this.handleChange = this.handleChange.bind(this)
+    //     }
+    //     handleChange (e) {
+    //         this.props.valueInput1(e.target.value)
+    //     }
+    //     render() {
+    //         return (
+    //             <p>二、<input type='text' value={this.props.inpvalue} onChange={this.handleChange}></input></p>
+    //         )
+    //     }
+    // }
+    class Inp extends React.Component{
+        constructor () {
+            super()
+            this.state= {
+                value: 0,
+                type: 'Centigrade'
+            }
+            this.valueInput1 = this.valueInput1.bind(this)
+        }
+        valueInput1 (val, name) {
+            console.log(name)
+           this.setState(function(state){
+               state.value = val
+               state.type = name
+               return state
+           })
+        }
+        render () {
+            let Centigrade = 0, Fahrenhert = 0;
+            console.log(this.state.type)
+            if(this.state.type === 'Centigrade') {
+                Centigrade = this.state.value;console.log(this.state.value)
+                Fahrenhert = 32 + Centigrade * 1.8;
+            } else {
+                Fahrenhert = this.state.value
+                Centigrade = (Fahrenhert - 32) / 1.8
+            }
+            return (
+                <div className="box">
+                    <Input valueInput1={this.valueInput1} inpvalue={Centigrade} name='Centigrade'/>
+                    <Input valueInput1={this.valueInput1} inpvalue={Fahrenhert} name = 'Fahrenhert'/>
+                </div>
+            )
+        }
+    }
+    
+    ReactDOM.render(
+       <Inp/>,
+        document.getElementById('example')
+    )
+   
+</script>
+</html>
